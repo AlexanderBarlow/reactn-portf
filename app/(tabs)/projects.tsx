@@ -1,0 +1,22 @@
+import { View, Text, StyleSheet } from "react-native";
+
+export default function ProjectsScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Projects coming soon 🚧</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#020617",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    color: "#94a3b8",
+    fontSize: 18,
+  },
+});
