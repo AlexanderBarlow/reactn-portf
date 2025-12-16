@@ -11,7 +11,6 @@ export default function TabsLayout() {
           tabBarStyle: { display: "none" },
         }}
       />
-      <LiquidDock />
     </View>
   );
 }

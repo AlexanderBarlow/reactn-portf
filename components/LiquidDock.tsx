@@ -1,23 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import { usePathname, useRouter } from "expo-router";
 import { Pressable, View } from "react-native";
 
-export default function LiquidDock() {
-
-
-
-  const pathname = usePathname();
-  const router = useRouter();
-
-  console.log("pathname:", pathname);
-
-const tabs = [
-  { route: "/", icon: "person-outline", active: "person" },
-  { route: "/resume", icon: "briefcase-outline", active: "briefcase" },
-];
-
-
+export default function LiquidDock({ onJump, activeSection }) {
+  const tabs = [
+    { key: "top", icon: "person-outline", active: "person" },
+    { key: "projects", icon: "briefcase-outline", active: "briefcase" },
+    { key: "experience", icon: "layers-outline", active: "layers" },
+    { key: "contact", icon: "mail-outline", active: "mail" },
+  ];
 
   return (
     <View
@@ -30,33 +21,33 @@ const tabs = [
         alignItems: "center",
       }}
     >
-      {/* Outer glass shell */}
+      {/* Outer shell */}
       <View
         style={{
           borderRadius: 30,
           borderWidth: 0.6,
           borderColor: "rgba(255,255,255,0.4)",
           shadowColor: "#000",
-          shadowOpacity: 0.28,
-          shadowRadius: 22,
-          shadowOffset: { width: 0, height: 14 },
+          shadowOpacity: 0.32,
+          shadowRadius: 26,
+          shadowOffset: { width: 0, height: 18 },
         }}
       >
         <BlurView
-          intensity={30} // clearer, more liquid
+          intensity={22}
           tint="light"
           style={{
-            width: 300,
+            width: 320,
             height: 58,
             borderRadius: 30,
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-evenly",
-            backgroundColor: "rgba(255,255,255,0.07)",
+            backgroundColor: "rgba(255,255,255,0.06)",
             overflow: "hidden",
           }}
         >
-          {/* Inner highlight (specular edge) */}
+          {/* Inner specular highlight */}
           <View
             pointerEvents="none"
             style={{
@@ -70,12 +61,12 @@ const tabs = [
           />
 
           {tabs.map((tab) => {
-            const active = pathname === tab.route;
+            const active = activeSection === tab.key;
 
             return (
               <Pressable
-                key={tab.route}
-                onPress={() => router.push(tab.route)}
+                key={tab.key}
+                onPress={() => onJump(tab.key)}
                 style={{
                   width: 56,
                   height: 48,
@@ -86,18 +77,19 @@ const tabs = [
                 <Ionicons
                   name={active ? tab.active : tab.icon}
                   size={25}
-                  color={active ? "#0b1220" : "rgba(15,23,42,0.6)"}
+                  color={active ? "#0b1220" : "rgba(15,23,42,0.55)"}
                 />
 
+                {/* Active indicator */}
                 {active && (
                   <View
                     style={{
                       position: "absolute",
-                      bottom: 5,
-                      width: 14,
+                      bottom: 6,
+                      width: 16,
                       height: 2,
                       borderRadius: 1,
-                      backgroundColor: "rgba(15,23,42,0.55)",
+                      backgroundColor: "rgba(15,23,42,0.6)",
                     }}
                   />
                 )}

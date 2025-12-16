@@ -24,20 +24,21 @@ export const Colors = {
   },
 
   dark: {
-    // Backgrounds
-    background: backgroundDark,
-    glass: "rgba(255,255,255,0.08)",
+    // Background (this matters most)
+    background: "#020617",
 
-    // Text (CRITICAL for readability)
-    textPrimary: ink, // strong ink on glass
-    textSecondary: "rgba(15,23,42,0.75)", // readable body text
-    textMuted: "rgba(15,23,42,0.55)", // helper text
+    // Glass surfaces
+    glass: "rgba(255,255,255,0.06)",
+
+    // Text
+    textPrimary: "#f8fafc", // near-white
+    textSecondary: "#cbd5e1", // readable gray
+    textMuted: "#94a3b8", // helper text
+    accent: "#38bdf8", // vibrant blue
 
     // UI
-    accent,
-    icon: "rgba(15,23,42,0.65)",
-
+    icon: "rgba(15,23,42,0.7)",
     tabIconDefault: "rgba(15,23,42,0.45)",
-    tabIconSelected: ink,
+    tabIconSelected: "#0b1220",
   },
 };
