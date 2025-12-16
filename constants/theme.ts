@@ -1,53 +1,43 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+import { Platform } from "react-native";
 
-import { Platform } from 'react-native';
-
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const accent = "#7dd3fc";
+const backgroundDark = "#020617";
+const ink = "#0b1220";
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    // Backgrounds
+    background: "#f8fafc",
+    glass: "rgba(255,255,255,0.6)",
+
+    // Text
+    textPrimary: "#020617",
+    textSecondary: "rgba(2,6,23,0.75)",
+    textMuted: "rgba(2,6,23,0.55)",
+
+    // UI
+    accent,
+    icon: "rgba(2,6,23,0.65)",
+
+    tabIconDefault: "rgba(2,6,23,0.45)",
+    tabIconSelected: ink,
   },
+
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    // Backgrounds
+    background: backgroundDark,
+    glass: "rgba(255,255,255,0.08)",
+
+    // Text (CRITICAL for readability)
+    textPrimary: ink, // strong ink on glass
+    textSecondary: "rgba(15,23,42,0.75)", // readable body text
+    textMuted: "rgba(15,23,42,0.55)", // helper text
+
+    // UI
+    accent,
+    icon: "rgba(15,23,42,0.65)",
+
+    tabIconDefault: "rgba(15,23,42,0.45)",
+    tabIconSelected: ink,
   },
 };
-
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-  },
-});

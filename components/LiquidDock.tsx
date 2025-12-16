@@ -14,7 +14,7 @@ export default function LiquidDock() {
 
 const tabs = [
   { route: "/", icon: "person-outline", active: "person" },
-  { route: "/projects", icon: "briefcase-outline", active: "briefcase" },
+  { route: "/resume", icon: "briefcase-outline", active: "briefcase" },
 ];
 
 

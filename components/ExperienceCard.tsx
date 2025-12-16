@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import { BlurView } from "expo-blur";
 
-export default function ProjectCard({ title, description, stack }) {
+export default function ExperienceCard({ role, company, period, summary }) {
   return (
     <View
       style={{
@@ -11,49 +11,44 @@ export default function ProjectCard({ title, description, stack }) {
         borderWidth: 0.6,
         borderColor: "rgba(255,255,255,0.3)",
         backgroundColor: "rgba(255,255,255,0.04)",
-        shadowColor: "#000",
-        shadowOpacity: 0.22,
-        shadowRadius: 16,
-        shadowOffset: { width: 0, height: 10 },
       }}
     >
       <BlurView
         intensity={26}
         tint="light"
         style={{
-          padding: 20,
+          padding: 18,
           backgroundColor: "rgba(255,255,255,0.06)",
         }}
       >
         <Text
           style={{
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: "600",
             color: "#0b1220",
           }}
         >
-          {title}
+          {role}
         </Text>
 
         <Text
           style={{
-            marginTop: 6,
-            color: "rgba(15,23,42,0.65)",
-            lineHeight: 20,
-          }}
-        >
-          {description}
-        </Text>
-
-        <Text
-          style={{
-            marginTop: 10,
+            marginTop: 2,
             fontSize: 13,
-            color: "#7dd3fc",
-            fontWeight: "500",
+            color: "rgba(15,23,42,0.6)",
           }}
         >
-          {stack}
+          {company} • {period}
+        </Text>
+
+        <Text
+          style={{
+            marginTop: 8,
+            lineHeight: 20,
+            color: "rgba(15,23,42,0.7)",
+          }}
+        >
+          {summary}
         </Text>
       </BlurView>
     </View>
