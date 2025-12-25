@@ -1,47 +1,75 @@
 import { View, Text, Image } from "react-native";
 import { BlurView } from "expo-blur";
+import ProfileImage from "../assets/images/portf.png";
 
 export default function ProfileHeader() {
   return (
     <View
       style={{
-        borderRadius: 26,
-        overflow: "hidden",
-        borderWidth: 0.6,
-        borderColor: "rgba(255,255,255,0.35)",
-        backgroundColor: "rgba(255,255,255,0.04)",
-        shadowColor: "#000",
-        shadowOpacity: 0.28,
-        shadowRadius: 20,
-        shadowOffset: { width: 0, height: 14 },
+        paddingTop: 14,
+        paddingBottom: 8,
       }}
     >
-      <BlurView
-        intensity={28}
-        tint="light"
-        style={{
-          padding: 24,
-          alignItems: "center",
-          backgroundColor: "rgba(255,255,255,0.06)",
-        }}
-      >
-        <Image
-          source={require("../assets/images/icon.png")}
+      {/* Hero / Intro (not a card) */}
+      <View style={{ alignItems: "center" }}>
+        {/* Avatar ring with liquid-glass vibe */}
+        <View
           style={{
-            width: 120,
-            height: 120,
-            borderRadius: 60,
-            marginBottom: 16,
-            borderWidth: 1.5,
-            borderColor: "rgba(255,255,255,0.45)",
+            width: 118,
+            height: 118,
+            borderRadius: 59,
+            overflow: "hidden",
+            borderWidth: 1,
+            borderColor: "rgba(255,255,255,0.22)",
+            backgroundColor: "rgba(255,255,255,0.06)",
+            shadowColor: "#000",
+            shadowOpacity: 0.26,
+            shadowRadius: 18,
+            shadowOffset: { width: 0, height: 12 },
           }}
-        />
+        >
+          <BlurView
+            intensity={22}
+            tint="light"
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {/* Specular highlight */}
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                top: 10,
+                left: 14,
+                width: 44,
+                height: 18,
+                borderRadius: 999,
+                backgroundColor: "rgba(255,255,255,0.20)",
+              }}
+            />
 
+            <Image
+              source={ProfileImage}
+              style={{
+                width: 104,
+                height: 104,
+                borderRadius: 52,
+              }}
+            />
+          </BlurView>
+        </View>
+
+        {/* Name + role */}
         <Text
           style={{
-            fontSize: 26,
-            fontWeight: "700",
-            color: "#0b1220",
+            marginTop: 16,
+            fontSize: 34,
+            fontWeight: "800",
+            letterSpacing: -0.6,
+            color: "rgba(255,255,255,0.96)",
           }}
         >
           Alexander Barlow
@@ -50,15 +78,122 @@ export default function ProfileHeader() {
         <Text
           style={{
             marginTop: 6,
-            textAlign: "center",
-            color: "rgba(15,23,42,0.7)",
-            lineHeight: 20,
+            fontSize: 14,
+            fontWeight: "600",
+            letterSpacing: 1.8,
+            textTransform: "uppercase",
+            color: "rgba(255,255,255,0.60)",
           }}
         >
-          Full-stack developer focused on modern, mobile-first experiences,
-          clean architecture, and thoughtful UI.
+          Full-Stack Developer • Mobile-First UI
         </Text>
-      </BlurView>
+
+        {/* Liquid-glass “intro pill” */}
+        <View
+          style={{
+            marginTop: 14,
+            width: "100%",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              width: "92%",
+              borderRadius: 999,
+              overflow: "hidden",
+              borderWidth: 1,
+              borderColor: "rgba(255,255,255,0.16)",
+              backgroundColor: "rgba(255,255,255,0.05)",
+            }}
+          >
+            <BlurView
+              intensity={18}
+              tint="dark"
+              style={{
+                paddingVertical: 12,
+                paddingHorizontal: 16,
+                alignItems: "center",
+              }}
+            >
+              {/* Top edge highlight */}
+              <View
+                pointerEvents="none"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 1,
+                  backgroundColor: "rgba(255,255,255,0.16)",
+                }}
+              />
+
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 14,
+                  lineHeight: 20,
+                  color: "rgba(255,255,255,0.78)",
+                }}
+              >
+                I build modern experiences with clean architecture, thoughtful
+                motion, and “liquid glass” UI—optimized for mobile and shipped
+                fast.
+              </Text>
+            </BlurView>
+          </View>
+        </View>
+
+        {/* Micro “status chips” (optional but very iOS) */}
+        <View
+          style={{
+            marginTop: 14,
+            flexDirection: "row",
+            gap: 10,
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {[
+            "Next.js",
+            "React Native",
+            "Prisma",
+            "Supabase",
+            "Framer Motion",
+          ].map((label) => (
+            <View
+              key={label}
+              style={{
+                borderRadius: 999,
+                overflow: "hidden",
+                borderWidth: 1,
+                borderColor: "rgba(255,255,255,0.14)",
+                backgroundColor: "rgba(255,255,255,0.04)",
+              }}
+            >
+              <BlurView
+                intensity={14}
+                tint="dark"
+                style={{
+                  paddingVertical: 8,
+                  paddingHorizontal: 12,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "700",
+                    color: "rgba(255,255,255,0.74)",
+                    letterSpacing: 0.2,
+                  }}
+                >
+                  {label}
+                </Text>
+              </BlurView>
+            </View>
+          ))}
+        </View>
+      </View>
     </View>
   );
 }

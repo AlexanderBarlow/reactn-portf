@@ -4,11 +4,23 @@ import { Pressable, View } from "react-native";
 
 export default function LiquidDock({ onJump, activeSection }) {
   const tabs = [
-    { key: "top", icon: "person-outline", active: "person" },
-    { key: "projects", icon: "briefcase-outline", active: "briefcase" },
-    { key: "experience", icon: "layers-outline", active: "layers" },
-    { key: "contact", icon: "mail-outline", active: "mail" },
+    { key: "top", icon: "person-outline" },
+    { key: "projects", icon: "briefcase-outline" },
+    { key: "experience", icon: "layers-outline" },
+    { key: "contact", icon: "mail-outline" },
   ];
+
+  // Optical vertical nudges per icon (Ionicons are NOT visually centered)
+  const NUDGE_Y = {
+    top: -1,
+    projects: -1,
+    experience: -2, // layers icon is top-heavy
+    contact: -1,
+  };
+
+  const WIDTH = 320;
+  const HEIGHT = 58;
+  const RADIUS = 30;
 
   return (
     <View
@@ -21,82 +33,134 @@ export default function LiquidDock({ onJump, activeSection }) {
         alignItems: "center",
       }}
     >
-      {/* Outer shell */}
       <View
         style={{
-          borderRadius: 30,
-          borderWidth: 0.6,
-          borderColor: "rgba(255,255,255,0.4)",
+          borderRadius: RADIUS,
           shadowColor: "#000",
-          shadowOpacity: 0.32,
-          shadowRadius: 26,
-          shadowOffset: { width: 0, height: 18 },
+          shadowOpacity: 0.28,
+          shadowRadius: 22,
+          shadowOffset: { width: 0, height: 14 },
         }}
       >
-        <BlurView
-          intensity={22}
-          tint="light"
+        <View
           style={{
-            width: 320,
-            height: 58,
-            borderRadius: 30,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-            backgroundColor: "rgba(255,255,255,0.06)",
+            width: WIDTH,
+            height: HEIGHT,
+            borderRadius: RADIUS,
             overflow: "hidden",
+            borderWidth: 0.8,
+            borderColor: "rgba(255,255,255,0.22)",
+            backgroundColor: "rgba(255,255,255,0.04)",
           }}
         >
-          {/* Inner specular highlight */}
-          <View
-            pointerEvents="none"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 1,
-              backgroundColor: "rgba(255,255,255,0.45)",
-            }}
-          />
+          <BlurView intensity={24} tint="dark" style={{ flex: 1 }}>
+            {/* Dock top edge highlight */}
+            <View
+              pointerEvents="none"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 1,
+                backgroundColor: "rgba(255,255,255,0.18)",
+              }}
+            />
 
-          {tabs.map((tab) => {
-            const active = activeSection === tab.key;
+            {/* Icon row */}
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                alignItems: "center",
+                paddingHorizontal: 10,
+              }}
+            >
+              {tabs.map((tab) => {
+                const active = activeSection === tab.key;
 
-            return (
-              <Pressable
-                key={tab.key}
-                onPress={() => onJump(tab.key)}
-                style={{
-                  width: 56,
-                  height: 48,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Ionicons
-                  name={active ? tab.active : tab.icon}
-                  size={25}
-                  color={active ? "#0b1220" : "rgba(15,23,42,0.55)"}
-                />
-
-                {/* Active indicator */}
-                {active && (
-                  <View
+                return (
+                  <Pressable
+                    key={tab.key}
+                    onPress={() => onJump(tab.key)}
                     style={{
-                      position: "absolute",
-                      bottom: 6,
-                      width: 16,
-                      height: 2,
-                      borderRadius: 1,
-                      backgroundColor: "rgba(15,23,42,0.6)",
+                      flex: 1,
+                      height: 48,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
                     }}
-                  />
-                )}
-              </Pressable>
-            );
-          })}
-        </BlurView>
+                  >
+                    {/* Active glass pill */}
+                    {active && (
+                      <View
+                        pointerEvents="none"
+                        style={{
+                          position: "absolute",
+                          width: 52,
+                          height: 40,
+                          borderRadius: 999,
+                          overflow: "hidden",
+                          borderWidth: 0.8,
+                          borderColor: "rgba(255,255,255,0.20)",
+                          backgroundColor: "rgba(255,255,255,0.06)",
+                        }}
+                      >
+                        <BlurView
+                          intensity={32}
+                          tint="light"
+                          style={{
+                            flex: 1,
+                            backgroundColor: "rgba(255,255,255,0.10)",
+                          }}
+                        />
+                      </View>
+                    )}
+
+                    <Ionicons
+                      name={tab.icon}
+                      size={24}
+                      color={
+                        active
+                          ? "rgba(255,255,255,0.95)"
+                          : "rgba(255,255,255,0.70)"
+                      }
+                      style={{
+                        marginTop: NUDGE_Y[tab.key] ?? -1,
+                      }}
+                    />
+
+                    {/* Active indicator */}
+                    {active && (
+                      <View
+                        pointerEvents="none"
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          alignItems: "center",
+                          justifyContent: "flex-end",
+                          paddingBottom: 6,
+                        }}
+                      >
+                        <View
+                          style={{
+                            width: 18,
+                            height: 3,
+                            borderRadius: 999,
+                            backgroundColor: "rgba(255,255,255,0.70)",
+                          }}
+                        />
+                      </View>
+                    )}
+                  </Pressable>
+                );
+              })}
+            </View>
+          </BlurView>
+        </View>
       </View>
     </View>
   );
